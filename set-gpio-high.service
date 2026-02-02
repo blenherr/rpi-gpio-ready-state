@@ -1,5 +1,5 @@
 [Unit]
-Description=Listens for multi-user target and sets a GPIO pin HIGH
+Description=Listens for multi-user target and set a GPIO pin to HIGH
 Before=multi-user.target
 DefaultDependencies=no
 
