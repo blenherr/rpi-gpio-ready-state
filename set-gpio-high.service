@@ -1,0 +1,11 @@
+[Unit]
+Description=Listens for multi-user target and sets a GPIO pin HIGH
+Before=multi-user.target
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python /usr/bin/set-gpio-high.py
+
+[Install]
+WantedBy=multi-user.target
