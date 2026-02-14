@@ -41,6 +41,11 @@ echo "Copy python files into /usr/bin/"
 sudo cp $TEMP_DIR/$FILENAME-high.py /usr/bin/$FILENAME-high.py
 sudo cp $TEMP_DIR/$FILENAME-low.py /usr/bin/$FILENAME-low.py
 
+# Change python file permissions
+echo "Change python file permissions"
+sudo chmod 755 /usr/bin/$FILENAME-high.py
+sudo chmod 755 /usr/bin/$FILENAME-low.py
+
 # Create $TEMP_DIR/$FILENAME-high.service
 echo "Create $TEMP_DIR/$FILENAME-high.service"
 echo "[Unit]" > $TEMP_DIR/$FILENAME-high.service
