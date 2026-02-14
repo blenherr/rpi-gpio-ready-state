@@ -21,7 +21,7 @@
 # Automatic installation
 Download install script
 ```
-curl -O https://raw.githubusercontent.com/blenherr/rpi5-better-gpio-poweroff/refs/heads/main/install.sh
+curl -O https://raw.githubusercontent.com/blenherr/rpi-gpio-ready-state/refs/heads/main/install.sh
 ```
 Make changes to the file if necessary
 ```
@@ -36,7 +36,7 @@ sh install.sh
 # Automatic remove
 Download remove script
 ```
-curl -O https://raw.githubusercontent.com/blenherr/rpi5-better-gpio-poweroff/refs/heads/main/remove.sh
+curl -O https://raw.githubusercontent.com/blenherr/rpi-gpio-ready-state/refs/heads/main/remove.sh
 ```
 Run remove script
 ```
