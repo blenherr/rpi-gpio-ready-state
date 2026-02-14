@@ -1,8 +1,10 @@
 #!/bin/sh
 
-FILENAME="rpi-state-set-gpio"
 GPIO_PIN=22
+TARGET_HIGH="multi-user.target"
+TARGET_LOW="reboot.target halt.target poweroff.target"
 
+FILENAME="rpi-state-set-gpio"
 TEMP_DIR=$(mktemp -d)
 
 # Create $TEMP_DIR/$FILENAME-high.py
@@ -43,7 +45,7 @@ sudo cp $TEMP_DIR/$FILENAME-low.py /usr/bin/$FILENAME-low.py
 echo "Create $TEMP_DIR/$FILENAME-high.service"
 echo "[Unit]" > $TEMP_DIR/$FILENAME-high.service
 echo "Description=Listens for target and sets GPIO pin HIGH" >> $TEMP_DIR/$FILENAME-high.service
-echo "Before=multi-user.target" >> $TEMP_DIR/$FILENAME-high.service
+echo "Before=$TARGET_HIGH" >> $TEMP_DIR/$FILENAME-high.service
 echo "DefaultDependencies=no" >> $TEMP_DIR/$FILENAME-high.service
 echo "" >> $TEMP_DIR/$FILENAME-high.service
 echo "[Service]" >> $TEMP_DIR/$FILENAME-high.service
@@ -51,13 +53,13 @@ echo "Type=oneshot" >> $TEMP_DIR/$FILENAME-high.service
 echo "ExecStart=/usr/bin/python /usr/bin/$FILENAME-high.py" >> $TEMP_DIR/$FILENAME-high.service
 echo "" >> $TEMP_DIR/$FILENAME-high.service
 echo "[Install]" >> $TEMP_DIR/$FILENAME-high.service
-echo "WantedBy=multi-user.target" >> $TEMP_DIR/$FILENAME-high.service
+echo "WantedBy=$TARGET_HIGH" >> $TEMP_DIR/$FILENAME-high.service
 
 # Create $TEMP_DIR/$FILENAME-low.service
 echo "Create $TEMP_DIR/$FILENAME-low.service"
 echo "[Unit]" > $TEMP_DIR/$FILENAME-low.service
 echo "Description=Listens for target and sets GPIO pin LOW" >> $TEMP_DIR/$FILENAME-low.service
-echo "Before=reboot.target halt.target poweroff.target" >> $TEMP_DIR/$FILENAME-low.service
+echo "Before=$TARGET_LOW" >> $TEMP_DIR/$FILENAME-low.service
 echo "DefaultDependencies=no" >> $TEMP_DIR/$FILENAME-low.service
 echo "" >> $TEMP_DIR/$FILENAME-low.service
 echo "[Service]" >> $TEMP_DIR/$FILENAME-low.service
@@ -65,7 +67,7 @@ echo "Type=oneshot" >> $TEMP_DIR/$FILENAME-low.service
 echo "ExecStart=/usr/bin/python /usr/bin/$FILENAME-low.py" >> $TEMP_DIR/$FILENAME-low.service
 echo "" >> $TEMP_DIR/$FILENAME-low.service
 echo "[Install]" >> $TEMP_DIR/$FILENAME-low.service
-echo "WantedBy=reboot.target halt.target poweroff.target" >> $TEMP_DIR/$FILENAME-low.service
+echo "WantedBy=$TARGET_LOW" >> $TEMP_DIR/$FILENAME-low.service
 
 # Copy services
 echo "Copy services into /lib/systemd/system/"
