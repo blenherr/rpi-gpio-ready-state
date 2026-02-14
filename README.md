@@ -28,7 +28,9 @@ Make changes to the file if necessary
 nano install.sh
 ```
 Run install script
-```sh install.sh```
+```
+sh install.sh
+```
 
 
 # Automatic remove
@@ -37,7 +39,9 @@ Download remove script
 wget https://raw.githubusercontent.com/blenherr/rpi5-better-gpio-poweroff/refs/heads/main/remove.sh
 ```
 Run remove script
-```sh remove.sh```
+```
+sh remove.sh
+```
 
 
 
