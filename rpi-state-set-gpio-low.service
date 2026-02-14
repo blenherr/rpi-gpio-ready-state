@@ -1,0 +1,11 @@
+[Unit]
+Description=Listens for target and sets GPIO pin LOW
+Before=reboot.target halt.target poweroff.target
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python /usr/bin/rpi-state-set-gpio-low.py
+
+[Install]
+WantedBy=reboot.target halt.target poweroff.target
